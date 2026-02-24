@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question Paper Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Question Paper Hub</h1>
+
+<div class="card">
+  <h2>Upload Paper</h2>
+  <input type="text" id="uploadSubject" placeholder="Subject">
+  <input type="text" id="uploadYear" placeholder="Year">
+  <input type="file" id="fileInput" accept="application/pdf">
+  <button id="uploadBtn">Upload</button>
+</div>
+
+<div class="card">
+  <h2>Search Papers</h2>
+  <select id="subject">
+    <option value="">Select Subject</option>
+  </select>
+
+  <select id="year">
+    <option value="">Select Year</option>
+  </select>
+
+  <button id="searchBtn">Search</button>
+  <div id="results"></div>
+</div>
+
+<script type="module" src="app.js"></script>
+
+</body>
+</html>
