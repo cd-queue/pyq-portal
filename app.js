@@ -1,23 +1,18 @@
-﻿import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+﻿// This part copy from firbase as a SDK
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
 import {
   getFirestore,
   collection,
   addDoc,
   getDocs
 } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyADKKtKNybq5-D4wzeeCGWMbHywhCvVl3A",
-  authDomain: "pyq-portal-cd8b4.firebaseapp.com",
-  projectId: "pyq-portal-cd8b4",
-  storageBucket: "pyq-portal-cd8b4.firebasestorage.app",
-  messagingSenderId: "300627578397",
-  appId: "1:300627578397:web:d292b40f1ac9f2249e00f4"
-};
+import { firebaseConfig } from "./firebase-config.local.js";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// elements store in variables
 const uploadBtn = document.getElementById("uploadBtn");
 const searchBtn = document.getElementById("searchBtn");
 const uploadSubjectInput = document.getElementById("uploadSubject");
@@ -27,15 +22,18 @@ const subjectSelect = document.getElementById("subject");
 const yearSelect = document.getElementById("year");
 const resultsDiv = document.getElementById("results");
 
+// text convert to lower case and removed extra spaces
 function normalizeText(value) {
   return String(value ?? "").trim().toLowerCase();
 }
 
+// reset dropdown 
 function resetFilterOptions() {
   subjectSelect.innerHTML = '<option value="">Select Subject</option>';
   yearSelect.innerHTML = '<option value="">Select Year</option>';
 }
 
+// convert pdf to base64
 function toBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -45,10 +43,13 @@ function toBase64(file) {
   });
 }
 
+
+// fetching data from firbase database in  a new array and return it
 async function fetchPapers() {
   const snapshot = await getDocs(collection(db, "papers"));
   return snapshot.docs.map((docSnapshot) => docSnapshot.data());
 }
+
 
 async function loadFilters() {
   resetFilterOptions();
